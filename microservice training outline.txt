@@ -1,0 +1,64 @@
+I believe our current approach is too springboot focused...where it should be focused on microservice principles, containerization, orchestration, ci-cd, etc...
+So I was thinking that we would not have labs where they create springboot microservices, but simply provide the code to them that they can get running, 
+and then have labs related understanding the communication patterns, containerization, orchestration, ci-cd, etc...
+
+
+- principles of microservices
+	- first module giving details of why, principles...level of information like what fowler wrote https://martinfowler.com/articles/microservices.html#CharacteristicsOfAMicroserviceArchitecture
+	
+
+- spring boot
+
+	- brief background on what what is it, and why we used it
+	- also pointing out that this is just an option, and it really doens't matter
+	- lab - install and run the employee-service (spring boot rest api), testing w postman
+			- not a springboot or java course, so having them build it seems unnecessary
+			- this tag/branch of the provided code wouldn't have spring cloud implemented it at all.
+
+- spring cloud | netflix oss
+
+	- including this to provide a vehicle and implementation for the types of things that need to be considered:
+	- external configuration
+	- zuul - routing | security
+	- eureka - discovery
+		- client-side vs server side (kubernetes/openshift)
+	- feign - declarative ReST client
+	- hystrix - circuit breaking
+	- ribbon - client side load balancing (vs server side kubernetes/openshift)
+	
+	- lab - get configuration-service running (provided)
+		  - get eureka running (provided)
+		  - run a tag/branch of employee-service that has spring cloud installed configured for pulling of configuration, registration w/ eureka
+
+- containerization
+	- why?
+	- docker basics
+	
+	- lab - create dockerfile for employee-service...build image and run it in local docker daemon, testing w postman
+
+- kubernetes/openshift
+
+	- orchestration
+	- pods
+	- services
+	- routes
+	- build config | deployment config
+	
+	- lab - install minishift, run employee service using provided openshift templates (or have them build templates), testing w postman
+
+- ci/cd
+	- automation
+	- pipelines
+		- jenkins integration
+	
+	- lab - install pipeline from provided template (or have them create?), run pipeline, after deployment test w postman
+
+- ansible
+	- what is it?
+	- how does it work?
+	- lab 	- remove project from minishift/openshift 
+			- install ansible (can't be windows machines - maybe have to stand up awx and configure it to run from openshift?) 
+			- run provided ansible playbook to recreate entire project and application structure
+			- run pipelines, and test w postman
+			
+There are obviously lots of other topics we can cover, so feel free to modify this as it suits your style and things you think are important.
